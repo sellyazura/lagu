@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Kamu 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://source.unsplash.com/1600x900/?love,romantic') no-repeat center center/cover;
+            text-align: center;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 600;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .photo {
+            margin-top: 15px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            object-fit: cover;
+        }
+
+        .messages {
+            margin-top: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+
+        .messages.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        audio {
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Untuk Kamu 💕</h1>
+
+        <img src="pacar.jpg" alt="Foto Kamu" class="photo">
+
+        <div class="messages" id="message">Selamat datang, cinta! ❤️</div>
+
+        <audio id="song" controls autoplay muted>
+            <source src="https://docs.google.com/uc?export=download&id=1SD5Jbdm43rfRAbiVP-QUkbO_murHSKwQ" type="audio/mp3">
+            Browser kamu tidak mendukung pemutar audio.
+        </audio>
+    </div>
+
+    <script>
+        // Pesan berganti otomatis setiap 5 detik
+        const messages = [
+            "Selamat datang, cinta! ❤️",
+            "Kamu itu spesial banget buat aku. 💕",
+            "Setiap hari aku bersyukur punya kamu. 😊",
+            "Jangan lupa senyum hari ini ya! 😘",
+            "Aku di sini, selalu buat kamu. ❤️"
+        ];
+        
+        const messageElement = document.getElementById("message");
+        let index = 0;
+        
+        function showNextMessage() {
+            messageElement.classList.remove("active");
+            setTimeout(() => {
+                messageElement.innerHTML = messages[index];
+                messageElement.classList.add("active");
+                index = (index + 1) % messages.length;
+            }, 800);
+        }
+        
+        setInterval(showNextMessage, 5000);
+
+        // Aktifkan suara setelah user berinteraksi
+        window.addEventListener('click', () => {
+            const song = document.getElementById('song');
+            song.muted = false;
+            song.play();
+        }, { once: true });
+    </script>
+
+</body>
+</html>
